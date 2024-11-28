@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 import "./App.css";
-import { marked } from "https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/lib/marked.esm.js";
+import { marked } from "marked";
 import { useState } from "react";
+
+console.log(marked);
 
 marked.use({
   breaks: true,
