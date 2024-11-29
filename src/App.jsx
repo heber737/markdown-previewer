@@ -1,13 +1,17 @@
 /* eslint-disable react/prop-types */
 import "./App.css";
 import { marked } from "marked";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import Editor from "./components/Editor";
+import Preview from "./components/Preview";
 
-console.log(marked);
+// MARKED CONFIG
 
 marked.use({
   breaks: true,
 });
+
+// APP
 
 export default function App() {
   const [userInput, setUserInput] = useState(initialText);
@@ -15,24 +19,25 @@ export default function App() {
     editor: false,
     preview: false,
   });
+  const editorFlex = useRef(null);
 
   function handleChange(event) {
     setUserInput(event.target.value);
   }
 
-  function toogleEditor() {
+  function handleToogleEditor() {
     setHidden({
       editor: false,
       preview: !hidden.preview,
     });
     if (hidden.preview == false) {
-      document.getElementById("editor-flex").style.height = "120vh";
+      editorFlex.current.style.height = "120vh";
     } else {
-      document.getElementById("editor-flex").style.height = "230px";
+      editorFlex.current.style.height = "230px";
     }
   }
 
-  function tooglePreview() {
+  function handleTooglePreview() {
     setHidden({
       editor: !hidden.editor,
       preview: false,
@@ -41,51 +46,18 @@ export default function App() {
 
   return (
     <div id="main">
-      <div id="editor-flex" className={hidden.editor && "hidden"}>
+      <div ref={editorFlex} id="editor-flex" className={hidden.editor && "hidden"}>
         <Editor
           userInput={userInput}
-          handleChange={handleChange}
-          toogle={toogleEditor}
+          onChange={handleChange}
+          onToogleEditor={handleToogleEditor}
           hidden={hidden}
         />
       </div>
       <div id="preview-flex" className={hidden.preview && "hidden"}>
-        <Preview display={userInput} toogle={tooglePreview} hidden={hidden} />
+        <Preview display={userInput} onTooglePreview={handleTooglePreview} hidden={hidden} />
       </div>
     </div>
-  );
-}
-
-function Editor({ userInput, handleChange, toogle, hidden }) {
-  return (
-    <>
-      <div className="header">
-        Editor
-        <button onClick={toogle}>
-          {hidden.preview ? <span>&#x23F7;</span> : <span>&#x23F6;</span>}
-        </button>
-      </div>
-      <textarea
-        id="editor"
-        value={userInput}
-        onInput={(e) => handleChange(e)}
-      ></textarea>
-    </>
-  );
-}
-
-function Preview({ display, toogle, hidden }) {
-  return (
-    <>
-      <div className="header">
-        Previewer
-        <button onClick={toogle}>
-          {hidden.editor ? <span>&#x23F7;</span> : <span>&#x23F6;</span>}
-        </button>
-      </div>
-      <div id="preview" dangerouslySetInnerHTML={{ __html: marked.parse(display) }}>
-      </div>
-    </>
   );
 }
 
