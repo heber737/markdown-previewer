@@ -3,6 +3,8 @@ import { marked } from "marked";
 import DOMPurify from "dompurify";
 
 export default function Preview({ userInput, onTooglePreview, hidden }) {
+  const parsedInput = marked.parse(userInput);
+  const sanitizedInput = DOMPurify.sanitize(parsedInput);
   return (
     <>
       <div className="header">
@@ -13,7 +15,7 @@ export default function Preview({ userInput, onTooglePreview, hidden }) {
       </div>
       <div
         id="preview"
-        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked.parse(userInput)) }}
+        dangerouslySetInnerHTML={{ __html: sanitizedInput }}
       ></div>
     </>
   );

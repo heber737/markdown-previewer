@@ -13,11 +13,7 @@ This app consist of a Markdown Previewer. You can use it to enter formated text 
 - Node Package Manager
 - Node.js
 - Marked.js library to parse the entered text.
-- DOMPurify to sanitize the HTML output.
-
-
-
-I would like to rewrite the logic differently without so many if/else statements, and also include other operands and more advanced features like storing operation history using local storage.
+- DOMPurify to sanitize the HTML output at the DOM.
 
 ## How to Install and Run this App
 
@@ -32,4 +28,4 @@ This project was created by [Heber Villalobos](https://github.com/heber737).
 
 ## License
 
-This software is being released under a [MIT license](https://github.com/heber737/calculator/blob/main/LICENSE.md).
+This software is being released under a [MIT license](https://github.com/heber737/markdown-previewer/blob/main/LICENSE.md).
