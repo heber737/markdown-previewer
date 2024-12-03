@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import { marked } from "marked";
+import DOMPurify from "dompurify";
 
-export default function Preview({ sanitizedInput, onTooglePreview, hidden }) {
+export default function Preview({ userInput, onTooglePreview, hidden }) {
   return (
     <>
       <div className="header">
@@ -12,7 +13,7 @@ export default function Preview({ sanitizedInput, onTooglePreview, hidden }) {
       </div>
       <div
         id="preview"
-        dangerouslySetInnerHTML={{ __html: marked.parse(sanitizedInput) }}
+        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked.parse(userInput)) }}
       ></div>
     </>
   );

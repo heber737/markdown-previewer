@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState, useRef } from "react";
 import { marked } from "marked";
-import DOMPurify from "dompurify";
 import Editor from "./components/Editor";
 import Preview from "./components/Preview";
 import "./App.css";
@@ -21,8 +20,6 @@ export default function App() {
     preview: false,
   });
   const editorFlex = useRef(null);
-
-  const sanitizedInput = DOMPurify.sanitize(userInput);
 
   function handleChange(event) {
     setUserInput(event.target.value);
@@ -52,18 +49,18 @@ export default function App() {
       <div
         ref={editorFlex}
         id="editor-flex"
-        className={hidden.editor && "hidden"}
+        className={hidden.editor ? "hidden" : undefined}
       >
         <Editor
-          sanitizedInput={sanitizedInput}
+          userInput={userInput}
           onChange={handleChange}
           onToogleEditor={handleToogleEditor}
           hidden={hidden}
         />
       </div>
-      <div id="preview-flex" className={hidden.preview && "hidden"}>
+      <div id="preview-flex" className={hidden.preview ? "hidden" : undefined}>
         <Preview
-          sanitizedInput={sanitizedInput}
+          userInput={userInput}
           onTooglePreview={handleTooglePreview}
           hidden={hidden}
         />

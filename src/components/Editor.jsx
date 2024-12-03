@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 export default function Editor({
-  sanitizedInput,
+  userInput,
   onChange,
   onToogleEditor,
   hidden,
@@ -15,7 +15,7 @@ export default function Editor({
       </div>
       <textarea
         id="editor"
-        value={sanitizedInput}
+        value={userInput}
         onInput={(e) => onChange(e)}
       ></textarea>
     </>
