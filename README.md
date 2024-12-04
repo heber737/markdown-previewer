@@ -2,7 +2,7 @@
 
 ## Project Description
 
-This app consist of a Markdown Previewer. You can use it to enter formated text using basic HTML markdown syntax and see the output in the box below as you type.
+This app consists of an HTML Markdown Previewer. You can use it to enter formated text using basic HTML markdown syntax and see the output in the box below as you type.
 
 ## Technology Stack
 
